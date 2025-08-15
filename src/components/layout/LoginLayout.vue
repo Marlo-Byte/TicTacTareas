@@ -4,7 +4,11 @@
       <h2 class="title">
         {{ isLogin ? 'Bienvenido de nuevo' : 'Crea una cuenta' }}
       </h2>
+
       <slot></slot>
+
+      <!-- Botón para volver a Home -->
+      <router-link to="/" class="back-home">← Volver a Home</router-link>
     </div>
   </div>
 </template>
@@ -27,7 +31,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /*background: #f9fafb;*/ /* Fondo neutro y limpio */
+  /*background: #f9fafb;*/
   padding: 20px;
 }
 
@@ -42,7 +46,7 @@ export default {
   box-shadow: 
     0 15px 35px rgba(0, 0, 0, 0.2),
     0 5px 15px rgba(79, 70, 229, 0.3),
-    inset 0 0 10px rgba(79, 70, 229, 0.1); /* Sombra multicapa para un efecto sorprendente */
+    inset 0 0 10px rgba(79, 70, 229, 0.1);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
@@ -51,7 +55,7 @@ export default {
   box-shadow: 
     0 25px 50px rgba(0, 0, 0, 0.25),
     0 10px 20px rgba(79, 70, 229, 0.4),
-    inset 0 0 15px rgba(79, 70, 229, 0.2); /* Sombra más intensa al hover */
+    inset 0 0 15px rgba(79, 70, 229, 0.2);
 }
 
 .title {
@@ -79,6 +83,21 @@ export default {
 
 .title:hover::after {
   transform: translateX(0);
+}
+
+/* Estilo del botón de volver */
+.back-home {
+  display: block;
+  margin-top: 24px;
+  text-align: center;
+  font-weight: 600;
+  color: #4f46e5;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.back-home:hover {
+  color: #7c3aed;
 }
 
 @media (max-width: 480px) {
