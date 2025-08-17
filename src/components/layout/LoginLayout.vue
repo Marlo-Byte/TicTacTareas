@@ -1,10 +1,17 @@
 <template>
   <div class="login-container">
     <div class="login-box">
+      <!-- Botón para cambiar tema -->
+      <button class="theme-toggle" @click="toggleTheme">
+        {{ isDark ? '☀️' : '🌙' }}
+      </button>
+
+      <!-- Título -->
       <h2 class="title">
         {{ isLogin ? 'Bienvenido de nuevo' : 'Crea una cuenta' }}
       </h2>
 
+      <!-- Slot para formulario -->
       <slot></slot>
 
       <!-- Botón para volver a Home -->
@@ -13,16 +20,17 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "LoginLayout",
-  props: {
-    isLogin: {
-      type: Boolean,
-      required: true,
-    },
+<script setup>
+import { useTheme } from '@/composables/useTheme.js';
+
+const props = defineProps({
+  isLogin: {
+    type: Boolean,
+    required: true,
   },
-};
+});
+
+const { isDark, toggleTheme } = useTheme();
 </script>
 
 <style scoped>
@@ -31,10 +39,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  /*background: #f9fafb;*/
   padding: 20px;
+  background: #f3f4f6;
+  transition: background 0.3s ease;
 }
 
+/* Login box */
 .login-box {
   background: white;
   padding: 48px;
@@ -47,7 +57,7 @@ export default {
     0 15px 35px rgba(0, 0, 0, 0.2),
     0 5px 15px rgba(79, 70, 229, 0.3),
     inset 0 0 10px rgba(79, 70, 229, 0.1);
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  transition: transform 0.4s ease, box-shadow 0.4s ease, background 0.3s ease, color 0.3s ease;
 }
 
 .login-box:hover {
@@ -58,6 +68,30 @@ export default {
     inset 0 0 15px rgba(79, 70, 229, 0.2);
 }
 
+/* Botón toggle */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  color: #4f46e5;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Título */
 .title {
   font-size: 34px;
   font-weight: 800;
@@ -67,6 +101,7 @@ export default {
   letter-spacing: -0.8px;
   position: relative;
   overflow: hidden;
+  transition: color 0.3s ease;
 }
 
 .title::after {
@@ -85,7 +120,7 @@ export default {
   transform: translateX(0);
 }
 
-/* Estilo del botón de volver */
+/* Botón volver */
 .back-home {
   display: block;
   margin-top: 24px;
@@ -100,6 +135,7 @@ export default {
   color: #7c3aed;
 }
 
+/* Responsive */
 @media (max-width: 480px) {
   .login-box {
     padding: 32px;

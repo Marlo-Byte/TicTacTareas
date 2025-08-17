@@ -1,5 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from '@/views/HomeView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,9 +17,15 @@ const router = createRouter({
     {
       path: '/register',
       name: 'register',
-      component: () => import('@/features/auth/RegisterView.vue'), // <- esta línea faltaba
+      component: () => import('@/features/auth/RegisterView.vue'),
+    },
+    {
+      path: '/my-tasks',
+      name: 'my-tasks',
+      component: () => import('@/features/tasks/MyTasksView.vue'),
+      meta: { requiresAuth: true } // Indicates this route requires authentication
     },
   ],
-})
+});
 
-export default router
+export default router;

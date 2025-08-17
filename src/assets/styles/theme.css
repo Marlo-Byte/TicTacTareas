@@ -1,0 +1,219 @@
+/* 🎨 Paleta de modo oscuro */
+:root {
+  --vt-c-black: #181818;
+  --vt-c-black-soft: #222222;
+  --vt-c-black-mute: #282828;
+
+  --vt-c-divider-dark-1: rgba(84, 84, 84, 0.65);
+  --vt-c-divider-dark-2: rgba(84, 84, 84, 0.48);
+
+  --vt-c-text-dark-1: #ffffff;
+  --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
+}
+
+/* Variables semánticas modo oscuro */
+body.dark-theme {
+  --color-background: var(--vt-c-black);
+  --color-background-soft: var(--vt-c-black-soft);
+  --color-background-mute: var(--vt-c-black-mute);
+
+  --color-border: var(--vt-c-divider-dark-2);
+  --color-border-hover: var(--vt-c-divider-dark-1);
+
+  --color-heading: var(--vt-c-text-dark-1);
+  --color-text: var(--vt-c-text-dark-2);
+}
+
+/* Estilos globales */
+body.dark-theme {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  transition: background-color 0.3s, color 0.3s;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Headers */
+body.dark-theme .header {
+  background-color: var(--color-background-soft);
+  color: var(--color-heading);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Task items */
+body.dark-theme .task-item {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+body.dark-theme .task-item:hover {
+  background-color: var(--color-background-mute);
+}
+
+body.dark-theme .task-item span.completed {
+  color: rgba(200, 200, 200, 0.8); /* gris claro para completadas */
+}
+
+/* Inputs y bordes */
+body.dark-theme input,
+body.dark-theme textarea,
+body.dark-theme select {
+  background-color: var(--color-background-mute);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body.dark-theme input:focus,
+body.dark-theme textarea:focus,
+body.dark-theme select:focus {
+  border-color: var(--color-border-hover);
+  outline: none;
+}
+
+/* Botones */
+body.dark-theme button {
+  background-color: var(--color-background-soft);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body.dark-theme button:hover {
+  background-color: var(--color-background-mute);
+  border-color: var(--color-border-hover);
+}
+
+/* TabBar */
+body.dark-theme .tab-bar button {
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background-soft);
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+body.dark-theme .tab-bar button:hover {
+  background-color: var(--color-background-mute);
+}
+
+body.dark-theme .tab-bar button.active {
+  background-color: #2c3e50; /* Indigo oscuro */
+  color: var(--vt-c-text-dark-1); /* Blanco */
+  border-color: #2c3e50;
+}
+
+/* Badges */
+body.dark-theme .badge {
+  background: red;
+  color: white;
+}
+
+/* Perfil */
+body.dark-theme .profile-pic {
+  border-color: #555;
+}
+
+body.dark-theme .profile-pic:hover {
+  border-color: #2c3e50;
+}
+
+/* Dropdown */
+body.dark-theme .dropdown {
+  background-color: var(--color-background-soft);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+body.dark-theme .dropdown button:hover {
+  background-color: var(--color-background-mute);
+}
+
+/*WelcomePage*/
+
+body.dark-theme .hero {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #374151 100%);
+  color: #f5f5f5;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+body.dark-theme .primary {
+  background: linear-gradient(90deg, #fbbf24, #f87171);
+  color: black;
+}
+body.dark-theme .primary:hover {
+  box-shadow: 0 8px 20px rgba(248,113,113,0.4);
+}
+body.dark-theme .secondary {
+  background: rgba(255,255,255,0.05);
+  color: #f5f5f5;
+  border: 2px solid #f5f5f5;
+}
+body.dark-theme .secondary:hover {
+  background: #f5f5f5;
+  color: #374151;
+  box-shadow: 0 8px 20px rgba(245,245,245,0.2);
+}
+
+
+/* ================= LOGIN LAYOUT ================= */
+body.dark-theme .login-container {
+  background: #111827;
+}
+
+body.dark-theme .login-box {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 50%, #374151 100%);
+  color: #f5f5f5;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.5),
+    0 5px 15px rgba(79, 70, 229, 0.5),
+    inset 0 0 10px rgba(79, 70, 229, 0.2);
+}
+
+body.dark-theme .title {
+  color: #f5f5f5;
+}
+
+body.dark-theme .title::after {
+  background: linear-gradient(to right, #fbbf24, #f87171);
+}
+
+body.dark-theme .back-home {
+  color: #fbbf24;
+}
+
+body.dark-theme .theme-toggle {
+  background: rgba(0,0,0,0.3);
+  color: #f5f5f5;
+}
+
+/* ================= login ================= */
+body.dark-theme .form {
+
+  color: #f5f5f5;
+
+}
+
+body.dark-theme label {
+  color: #f5f5f5;
+}
+
+body.dark-theme input {
+  background: rgba(255,255,255,0.05);
+  color: #fbbf24;
+  border: 1px solid #f5f5f5;
+}
+
+body.dark-theme input::placeholder {
+  color: #fde68a;
+}
+
+body.dark-theme button[type="submit"] {
+  background: linear-gradient(90deg, #fbbf24, #f87171);
+  color: black;
+}
+
+body.dark-theme button[type="submit"]:hover {
+  box-shadow: 0 8px 20px rgba(248, 113, 113, 0.4);
+}
+
+body.dark-theme .toggle-button {
+  color: #fbbf24;
+}

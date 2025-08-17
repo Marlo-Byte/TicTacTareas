@@ -75,35 +75,51 @@ export default {
 
 label {
   font-size: 14px;
-  color: #333;
+  color: #111827;
   margin-bottom: 6px;
   display: block;
+  font-weight: 600;
+  transition: color 0.3s ease;
 }
 
+/* Inputs con color y placeholder */
 input {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   font-size: 14px;
   border: 1px solid #ccc;
-  border-radius: 6px;
+  border-radius: 8px;
   box-sizing: border-box;
+  color: #4f46e5; /* color del texto */
+  font-weight: 600;
+  transition: all 0.3s ease;
+  background: rgba(255,255,255,0.8);
 }
 
+input::placeholder {
+  color: #a5b4fc; /* placeholder */
+}
+
+/* Botón submit */
 button[type="submit"] {
-  margin-top: 10px;
+  margin-top: 16px;
   padding: 12px;
   font-size: 16px;
-  background-color: #4f46e5;
+  background: linear-gradient(90deg, #4f46e5, #7c3aed);
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
 }
 
 button[type="submit"]:hover {
-  background-color: #4338ca;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(127, 29, 255, 0.4);
 }
 
+/* Toggle */
 .toggle-text {
   margin-top: 16px;
   text-align: center;

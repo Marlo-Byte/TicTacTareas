@@ -1,9 +1,16 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
+import { useTheme } from '@/composables/useTheme.js';
+
+const { isDark, toggleTheme } = useTheme();
 </script>
 
 <template>
   <main class="landing">
+    <button class="theme-toggle" @click="toggleTheme">
+      {{ isDark ? '☀️' : '🌙' }}
+    </button>
+
     <section class="hero">
       <h1>✨ Bienvenido a <span>TicTacTareas</span></h1>
       <p>Organiza tus tareas con estilo, rapidez y sin complicaciones.</p>
@@ -13,31 +20,57 @@ import { RouterLink, RouterView } from 'vue-router'
         <RouterLink to="/login" class="cta-button secondary">🔑 Iniciar Sesión</RouterLink>
       </div>
     </section>
+
     <RouterView />
   </main>
 </template>
 
 <style scoped>
-/* Fondo gradiente moderno */
 .landing {
-  min-height: 100vh; /* Ocupa toda la pantalla */
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  padding: 0;
+  position: relative; /* para el botón toggle */
+}
 
-  padding: 1rem;
+/* Toggle modo oscuro */
+.theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  border: none;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+body.dark-theme .theme-toggle {
+  background: rgba(0,0,0,0.3);
+  color: #f5f5f5;
 }
 
 /* Contenedor centrado */
 .hero {
   text-align: center;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 4rem 3rem; /* Más espacio interno */
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
   background: linear-gradient(135deg, #6d28d9 0%, #4f46e5 50%, #3b82f6 100%);
   color: white;
-  max-width: 900px; /* Más ancho */
+  padding: 4rem 3rem;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  max-width: 900px;
   width: 100%;
   box-shadow: 0 8px 30px rgba(0,0,0,0.2);
   animation: fadeIn 0.8s ease-in-out;
@@ -49,7 +82,6 @@ import { RouterLink, RouterView } from 'vue-router'
   font-weight: 800;
   margin-bottom: 1rem;
 }
-
 .hero h1 span {
   background: linear-gradient(90deg, #ff9f43, #ff6b6b);
   -webkit-background-clip: text;
@@ -83,10 +115,9 @@ import { RouterLink, RouterView } from 'vue-router'
   background: linear-gradient(90deg, #ff9f43, #ff6b6b);
   color: white;
 }
-
 .primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
+  box-shadow: 0 8px 20px rgba(255,107,107,0.4);
 }
 
 .secondary {
@@ -94,12 +125,11 @@ import { RouterLink, RouterView } from 'vue-router'
   color: white;
   border: 2px solid white;
 }
-
 .secondary:hover {
   background: white;
   color: #4f46e5;
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 20px rgba(255,255,255,0.3);
 }
 
 /* Animación de entrada */
@@ -110,11 +140,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
 /* Responsive */
 @media (max-width: 640px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-  .hero p {
-    font-size: 1rem;
-  }
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
 }
+
 </style>
