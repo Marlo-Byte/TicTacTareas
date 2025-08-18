@@ -1,20 +1,42 @@
 import { defineStore } from 'pinia';
+import http from '@/services/http';
 
 export const useTaskStore = defineStore('tasks', {
   state: () => ({
-    tasks: [
-      { id: 1, name: 'Grocery Shopping', dueDate: '2024-03-15', completed: false },
-      { id: 2, name: 'Book Appointment', dueDate: '2024-03-16', completed: false },
-      { id: 3, name: 'Pay Bills', dueDate: '2024-03-17', completed: false },
-      { id: 4, name: 'Plan Trip', dueDate: '2024-03-18', completed: false },
-      { id: 5, name: 'Workout', dueDate: '2024-03-19', completed: false },
-      { id: 6, name: 'Workout', dueDate: '2024-03-19', completed: false },
-      { id: 7, name: 'Workout', dueDate: '2024-03-19', completed: false },
-      { id: 8, name: 'Workout', dueDate: '2024-03-19', completed: false },
-      { id: 9, name: 'Workout', dueDate: '2024-03-19', completed: false },
-      { id: 10, name: 'Workout', dueDate: '2024-03-19', completed: false },
-      { id: 11, name: 'Workout', dueDate: '2024-03-19', completed: false },
-      { id: 12, name: 'Workout', dueDate: '2024-03-19', completed: false },
-    ]
-  })
+    tasks: []
+  }),
+  actions: {
+    async fetchTasks() {
+      try {
+        const { data } = await http.get('/task'); // trae todas las tareas
+        this.tasks = data; // reemplaza el array completo para evitar duplicados
+      } catch (err) {
+        console.error('Error fetching tasks:', err);
+      }
+    },
+    async addTask(task) {
+      try {
+        await http.post('/task', task); // crea en backend
+        await this.fetchTasks(); // recarga todas desde backend
+      } catch (err) {
+        console.error('Error adding task:', err);
+      }
+    },
+    async updateTask(id, updatedTask) {
+      try {
+        await http.put(`/task/${id}`, updatedTask);
+        await this.fetchTasks();
+      } catch (err) {
+        console.error('Error updating task:', err);
+      }
+    },
+    async deleteTask(id) {
+      try {
+        await http.delete(`/task/${id}`);
+        await this.fetchTasks();
+      } catch (err) {
+        console.error('Error deleting task:', err);
+      }
+    }
+  }
 });

@@ -7,14 +7,20 @@
     <TabBar :activeTab="activeTab" @update:activeTab="updateTab" />
 
     <!-- Lista filtrada -->
-    <TaskItem v-for="task in filteredTasks" :key="task.id" :task="task" />
+    <TaskItem 
+      v-for="task in filteredTasks" 
+      :key="task.id" 
+      :task="task"
+      @edit="editTask"
+      @delete="deleteTask"
+    />
   </div>
 </template>
 
 <script>
 import TabBar from '../common/TabBar.vue';
 import TaskItem from './TaskItem.vue';
-import SearchBar from '../common/SearchBar.vue'; // 👈 importa tu searchbar
+import SearchBar from '../common/SearchBar.vue';
 import { useTaskStore } from '../../stores/tasks';
 
 export default {
@@ -22,27 +28,23 @@ export default {
   data() {
     return {
       activeTab: 'all',
-      searchQuery: '' // 👈 estado local de búsqueda
+      searchQuery: ''
     };
   },
   computed: {
     filteredTasks() {
       const store = useTaskStore();
-
-      // 1️⃣ Filtrar por pestaña
       let tasks = store.tasks;
-      if (this.activeTab === 'pending') {
-        tasks = tasks.filter(t => !t.completed);
-      } else if (this.activeTab === 'completed') {
-        tasks = tasks.filter(t => t.completed);
-      } else if (this.activeTab === 'progress') {
-        tasks = tasks.filter(t => t.inProgress); // si tienes esta propiedad
-      }
 
-      // 2️⃣ Filtrar por búsqueda
+      // Filtrar por categoría
+      if (this.activeTab === 'pending') tasks = tasks.filter(t => !t.completed);
+      else if (this.activeTab === 'completed') tasks = tasks.filter(t => t.completed);
+      else if (this.activeTab === 'progress') tasks = tasks.filter(t => t.inProgress);
+
+      // Filtrar por búsqueda
       if (this.searchQuery) {
         tasks = tasks.filter(t =>
-          t.title.toLowerCase().includes(this.searchQuery.toLowerCase())
+          t.name.toLowerCase().includes(this.searchQuery.toLowerCase())
         );
       }
 
@@ -50,18 +52,20 @@ export default {
     }
   },
   methods: {
-    updateTab(tab) {
-      this.activeTab = tab;
+    updateTab(tab) { this.activeTab = tab; },
+    updateSearch(query) { this.searchQuery = query; },
+    async editTask(task) {
+      const store = useTaskStore();
+      await store.updateTask(task.id, task);
     },
-    updateSearch(query) {
-      this.searchQuery = query;
+    async deleteTask(task) {
+      const store = useTaskStore();
+      await store.deleteTask(task.id);
     }
+  },
+  mounted() {
+    const store = useTaskStore();
+    store.fetchTasks(); // carga tareas al iniciar
   }
 };
 </script>
-
-<style scoped>
-.task-list {
-  padding: 20px;
-}
-</style>

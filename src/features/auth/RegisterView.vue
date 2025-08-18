@@ -1,23 +1,14 @@
 <template>
   <LoginLayout :isLogin="false">
-    <RegisterForm @toggle="goToLogin" />
+    <AuthForm :isLogin="false" @toggle="goToLogin" />
   </LoginLayout>
 </template>
 
-<script>
-import LoginLayout from "@/components/layout/LoginLayout.vue";
-import RegisterForm from "@/components/forms/RegisterForm.vue";
+<script setup>
+import { useRouter } from "vue-router";
+import LoginLayout from "@/components/layout/LoginLayout.vue"; // asumimos que ya lo tenés
+import AuthForm from "@/components/forms/AuthForm.vue";
 
-export default {
-  name: "RegisterView",
-  components: {
-    LoginLayout,
-    RegisterForm,
-  },
-  methods: {
-    goToLogin() {
-      this.$router.push("/login"); // redirige al login
-    },
-  },
-};
+const router = useRouter();
+const goToLogin = () => router.push("/login");
 </script>

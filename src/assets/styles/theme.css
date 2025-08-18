@@ -217,3 +217,95 @@ body.dark-theme button[type="submit"]:hover {
 body.dark-theme .toggle-button {
   color: #fbbf24;
 }
+
+
+
+/* MODAL CREAR TAREA */
+
+/* Modal Backdrop */
+body.dark-theme .modal-backdrop {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7); /* un poco más oscuro para modo oscuro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+/* Modal Container */
+body.dark-theme .modal {
+  background: var(--color-background-soft);
+  color: var(--color-text);
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Labels */
+body.dark-theme label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+/* Inputs y Textareas */
+body.dark-theme input,
+body.dark-theme textarea {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-background-mute);
+  color: var(--color-text);
+  font-size: 14px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+body.dark-theme input:focus,
+body.dark-theme textarea:focus {
+  border-color: var(--color-border-hover);
+  outline: none;
+}
+
+body.dark-theme textarea {
+  resize: none;
+}
+
+/* Botones */
+body.dark-theme .buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+body.dark-theme button {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+
+body.dark-theme button[type="submit"] {
+  background: linear-gradient(90deg, #fbbf24, #f87171);
+  color: black;
+}
+
+body.dark-theme button[type="submit"]:hover {
+  box-shadow: 0 8px 20px rgba(248,113,113,0.4);
+}
+
+body.dark-theme button[type="button"] {
+  background-color: var(--color-background-mute);
+  color: var(--color-text);
+}
+
+body.dark-theme button[type="button"]:hover {
+  background-color: var(--color-background-soft);
+}

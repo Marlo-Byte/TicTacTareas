@@ -1,22 +1,21 @@
 <template>
   <div class="task-item">
-    <!-- Checkbox personalizado -->
+    <!-- Checkbox -->
     <label class="checkbox-container">
       <input type="checkbox" v-model="task.completed" />
       <span class="checkmark"></span>
     </label>
 
-    <!-- Nombre y vencimiento -->
+    <!-- Información de la tarea -->
     <div class="task-info">
-      <span :class="{ completed: task.completed }">{{ task.name }}</span>
+      <span class="task-title" :class="{ completed: task.completed }">{{ task.title }}</span>
+      <p class="task-description">{{ task.description }}</p>
       <small class="due-date">Vence: {{ task.dueDate }}</small>
     </div>
 
     <!-- Estado y acciones -->
     <div class="task-actions">
       <span class="task-status" :class="statusClass">{{ statusText }}</span>
-
-      <!-- Botones editar y eliminar -->
       <button class="action-btn edit-btn" @click="$emit('edit', task)">✏️</button>
       <button class="action-btn delete-btn" @click="$emit('delete', task)">🗑️</button>
     </div>
@@ -44,19 +43,14 @@ export default {
 <style scoped>
 .task-item {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   padding: 12px;
   border: 1px solid var(--color-border);
   border-radius: 8px;
   margin-bottom: 8px;
   background-color: var(--color-background-soft);
-  color: var(--color-text);
-  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
-}
-
-.task-item:hover {
-  background-color: var(--color-background-mute);
+  transition: background-color 0.2s, border-color 0.2s;
 }
 
 .task-info {
@@ -66,19 +60,25 @@ export default {
   flex: 1;
 }
 
-.task-item span {
+.task-title {
   font-size: 14px;
+  font-weight: 600;
 }
 
-.task-item span.completed {
+.task-title.completed {
   text-decoration: line-through;
   color: rgba(200, 200, 200, 0.8);
 }
 
+.task-description {
+  font-size: 13px;
+  color: #555;
+  margin: 2px 0 4px 0;
+}
+
 .due-date {
   font-size: 12px;
-  color: rgba(200,200,200,0.7);
-  margin-top: 2px;
+  color: rgba(120,120,120,0.8);
 }
 
 /* Checkbox personalizado */
@@ -139,7 +139,6 @@ export default {
   gap: 6px;
 }
 
-/* Estado visual */
 .task-status {
   padding: 2px 10px;
   border-radius: 12px;
@@ -153,7 +152,6 @@ export default {
 .progress-status { background-color: #5bc0de; color: white; }
 .completed-status { background-color: #28a745; color: white; }
 
-/* Botones de acción */
 .action-btn {
   background: none;
   border: none;
@@ -163,10 +161,7 @@ export default {
   transition: transform 0.2s;
 }
 
-.action-btn:hover {
-  transform: scale(1.2);
-}
-
-.edit-btn { color: #ffc107; }   /* amarillo */
-.delete-btn { color: #dc3545; } /* rojo */
+.action-btn:hover { transform: scale(1.2); }
+.edit-btn { color: #ffc107; }
+.delete-btn { color: #dc3545; }
 </style>
